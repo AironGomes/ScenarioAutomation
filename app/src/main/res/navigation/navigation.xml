@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.airongomes.scenarioautomation.ui.HomeFragment"
+        android:label="Scenario Automation"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_newProjectFragment"
+            app:destination="@id/newProjectFragment"
+            app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailProjectFragment"
+            app:destination="@id/detailProjectFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailEnvironmentFragment"
+        android:name="com.airongomes.scenarioautomation.ui.DetailEnvironmentFragment"
+        android:label="Detalhes do Ambiente"
+        tools:layout="@layout/fragment_detail_environment">
+        <action
+            android:id="@+id/action_detailEnvironmentFragment_to_newDeviceFragment"
+            app:destination="@id/newDeviceFragment"
+            app:popUpTo="@id/detailEnvironmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailProjectFragment"
+        android:name="com.airongomes.scenarioautomation.ui.DetailProjectFragment"
+        android:label="Detalhes do Projeto"
+        tools:layout="@layout/fragment_detail_project">
+        <action
+            android:id="@+id/action_detailProjectFragment_to_newEnvironmentFragment"
+            app:destination="@id/newEnvironmentFragment"
+            app:popUpTo="@id/detailProjectFragment" />
+        <action
+            android:id="@+id/action_detailProjectFragment_to_detailEnvironmentFragment"
+            app:destination="@id/detailEnvironmentFragment"
+            app:popUpTo="@id/detailProjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newProjectFragment"
+        android:name="com.airongomes.scenarioautomation.ui.NewProjectFragment"
+        android:label="Adicionar Projeto"
+        tools:layout="@layout/fragment_new_project" >
+        <action
+            android:id="@+id/action_newProjectFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newDeviceFragment"
+        android:name="com.airongomes.scenarioautomation.ui.NewDeviceFragment"
+        android:label="Adicionar Dispositivo"
+        tools:layout="@layout/fragment_new_device" >
+        <action
+            android:id="@+id/action_newDeviceFragment_to_detailEnvironmentFragment"
+            app:destination="@id/detailEnvironmentFragment"
+            app:popUpTo="@id/detailProjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newEnvironmentFragment"
+        android:name="com.airongomes.scenarioautomation.ui.NewEnvironmentFragment"
+        android:label="Adicionar Ambiente"
+        tools:layout="@layout/fragment_new_environment" >
+        <action
+            android:id="@+id/action_newEnvironmentFragment_to_detailProjectFragment"
+            app:destination="@id/detailProjectFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+</navigation>

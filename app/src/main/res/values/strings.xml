@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ScenarioProject</string>
+    <string name="new_project">Acrescentar novo projeto</string>
+    <string name="new_environment">Acrescentar novo ambiente</string>
+    <string name="project_name">Nome do Projeto</string>
+    <string name="environment_name">Nome do Ambiente</string>
+    <string name="edit_text_user">Usuário</string>
+    <string name="edit_text_address">Endereço</string>
+    <string name="title_new_project">Novo Projeto</string>
+    <string name="label_type_of_project">Escolha o tipo do projeto:</string>
+    <string name="image_project_type">Tipo do Projeto</string>
+    <string name="button_start">Iniciar</string>
+    <string name="message_project_name_or_user_is_blank">Os campos \'Nome do Projeto\' e \'Usuário\' não podem ficar vazios.</string>
+    <string name="button_confirm">Confirmar</string>
+    <string name="button_cancel">Cancelar</string>
+</resources>
