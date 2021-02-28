@@ -3,29 +3,39 @@ package com.airongomes.scenarioautomation.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.airongomes.scenarioautomation.database.Project
+import com.airongomes.scenarioautomation.database.ProjectDao
+import kotlinx.coroutines.launch
 
-class NewProjectViewModel: ViewModel() {
+class NewProjectViewModel(dataSource: ProjectDao) : ViewModel() {
 
-    // Livedata usado para fechar o fragmento
-    private var _closeFragment = MutableLiveData<Boolean>()
+    private val database = dataSource
+
+    // Livedata para fechar o fragmento
+    private val _closeFragment = MutableLiveData<Boolean>()
     val closeFragment: LiveData<Boolean>
         get() = _closeFragment
 
     /**
-     * onClick buttonCancel de fragment_new_project
+     * Responsável por Salvar os dados do projeto no banco de dados
      */
-    fun cancelButton() {
-        _closeFragment.value = true
+    fun saveProject(projectName: String, userName: String, address: String) {
+        val date = System.currentTimeMillis()
+        val project = Project(
+            projectName = projectName,
+            userName = userName,
+            address = address,
+            date = date)
+
+        viewModelScope.launch {
+            database.insertProject(project)
+            _closeFragment.value = true
+        }
     }
 
     /**
-     * Responsável por Salvar os dados do projeto no banco de dados
-     */
-    fun saveProject() {}
-
-
-    /**
-     * Resetar liveData após ser observada
+     * Reseta o Livedata closeFragment
      */
     fun closeFragmentObserved() {
         _closeFragment.value = false

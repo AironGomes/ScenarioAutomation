@@ -11,8 +11,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.airongomes.scenarioautomation.R
+import com.airongomes.scenarioautomation.database.ProjectDatabase
 import com.airongomes.scenarioautomation.databinding.FragmentNewProjectBinding
+import com.airongomes.scenarioautomation.viewModel.HomeViewModel
+import com.airongomes.scenarioautomation.viewModel.HomeViewModelFactory
 import com.airongomes.scenarioautomation.viewModel.NewProjectViewModel
+import com.airongomes.scenarioautomation.viewModel.NewProjectViewModelFactory
 
 class NewProjectFragment : Fragment() {
 
@@ -29,21 +33,29 @@ class NewProjectFragment : Fragment() {
             container,
             false)
 
-        // Criando instância de viewModel
-        viewModel = ViewModelProvider(this).get(NewProjectViewModel::class.java)
+        // Cria uma instância de database e adiciona o projectDao para viewModel
+        val application = requireNotNull(this.activity).application
+        val dataSource = ProjectDatabase.getInstance(application).projectDao
+        val viewModelFactory = NewProjectViewModelFactory(dataSource)
 
+        // Cria instância de HomeViewModel
+        viewModel = ViewModelProvider(this, viewModelFactory).get(NewProjectViewModel::class.java)
 
-        // Observar closeFragment LiveData
+        // ClickListener para botão Cancelar
+        binding.buttonCancel.setOnClickListener { callHomeFragment() }
+
+        // ClickListener para botão Confirmar
+        binding.buttonConfirm.setOnClickListener { saveProject() }
+
+        // Observar o Livedata closeFragment
         viewModel.closeFragment.observe(viewLifecycleOwner, Observer {
-            if (it == true) {
+            if(it == true) {
                 callHomeFragment()
-                viewModel.closeFragmentObserved() // Resetar LiveData
+                viewModel.closeFragmentObserved()
             }
         })
 
-        // ClickListener para botão Confirmar
-        binding.buttonConfirm.setOnClickListener { confirmProjectData() }
-
+        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -57,15 +69,18 @@ class NewProjectFragment : Fragment() {
     /**
      * Verifica se os campos estão preenchidos e chama saveProject de ViewModel
      */
-    private fun confirmProjectData() {
-        if(binding.projectEditText.text.isNullOrBlank() ||
-            binding.userEditText.text.isNullOrBlank()) {
+    private fun saveProject() {
+        val projectName = binding.projectEditText.text.toString()
+        val userName = binding.userEditText.text.toString()
+        val address = binding.addressEditText.text.toString()
+
+        if(projectName.isBlank() || userName.isBlank()) {
             Toast.makeText(
                 requireContext(),
                 getText(R.string.message_project_name_or_user_is_blank),
                 Toast.LENGTH_LONG
             ).show()
         }
-        else viewModel.saveProject()
+        else viewModel.saveProject(projectName, userName, address)
     }
 }
