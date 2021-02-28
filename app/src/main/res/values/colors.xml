@@ -20,4 +20,5 @@
 
     <!-- Others Colors -->
     <color name="button_cancel_color">#C51162</color>
+    <color name="item_background">#F2F2F2</color>
 </resources>
