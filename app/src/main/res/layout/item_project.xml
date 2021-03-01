@@ -28,11 +28,12 @@
 
             <ImageView
                 android:id="@+id/image_project"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:contentDescription="@string/image_project_type"
                 android:src="@drawable/ic_home"
-                android:contentDescription="@string/image_project_type" />
+                app:projectType="@{project.type}"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_project_name"
@@ -62,12 +63,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
+                android:textColor="@color/gray"
                 android:textAlignment="center"
                 android:ellipsize="end"
-                app:projectAddress="@{project.address}"
-                android:lines="2"
-
-                tools:text="Endereço"/>
+                app:projectAddress="@{project.date}"
+                android:singleLine="true"
+                tools:text="Modificado em: 01/01/2000"/>
 
         </LinearLayout>
 

@@ -4,8 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
-@Database(entities = [Project::class], version = 1, exportSchema = false)
+
+@Database(entities = [Project::class], version = 2, exportSchema = false)
+@TypeConverters(Converter::class)
 abstract class ProjectDatabase: RoomDatabase() {
 
     abstract val projectDao: ProjectDao

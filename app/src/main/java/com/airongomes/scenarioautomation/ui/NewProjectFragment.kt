@@ -13,8 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.airongomes.scenarioautomation.R
 import com.airongomes.scenarioautomation.database.ProjectDatabase
 import com.airongomes.scenarioautomation.databinding.FragmentNewProjectBinding
-import com.airongomes.scenarioautomation.viewModel.HomeViewModel
-import com.airongomes.scenarioautomation.viewModel.HomeViewModelFactory
 import com.airongomes.scenarioautomation.viewModel.NewProjectViewModel
 import com.airongomes.scenarioautomation.viewModel.NewProjectViewModelFactory
 
@@ -73,6 +71,7 @@ class NewProjectFragment : Fragment() {
         val projectName = binding.projectEditText.text.toString()
         val userName = binding.userEditText.text.toString()
         val address = binding.addressEditText.text.toString()
+        val type = binding.radioGroup.checkedRadioButtonId
 
         if(projectName.isBlank() || userName.isBlank()) {
             Toast.makeText(
@@ -81,6 +80,6 @@ class NewProjectFragment : Fragment() {
                 Toast.LENGTH_LONG
             ).show()
         }
-        else viewModel.saveProject(projectName, userName, address)
+        else viewModel.saveProject(projectName, userName, address, type)
     }
 }

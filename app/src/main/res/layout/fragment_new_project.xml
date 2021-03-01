@@ -70,6 +70,48 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_type_of_project"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textAlignment="textStart"
+            android:text="@string/label_type_of_project"
+            app:layout_constraintTop_toBottomOf="@+id/address_text_field"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/style_general_margin"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:checkedButton="@id/type_house"
+            app:layout_constraintTop_toBottomOf="@+id/text_type_of_project"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp">
+
+            <RadioButton
+                android:id="@+id/type_house"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/ic_home"/>
+
+            <RadioButton
+                android:id="@+id/type_store"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:button="@drawable/ic_store"/>
+
+            <RadioButton
+                android:id="@+id/type_building"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:button="@drawable/ic_building"/>
+        </RadioGroup>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_confirm"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
