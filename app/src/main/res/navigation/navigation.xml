@@ -17,6 +17,10 @@
             android:id="@+id/action_homeFragment_to_detailProjectFragment"
             app:destination="@id/detailProjectFragment"
             app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailEnvironmentFragment"
@@ -72,4 +76,9 @@
             app:destination="@id/detailProjectFragment"
             app:popUpTo="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.airongomes.scenarioautomation.ui.AboutFragment"
+        android:label="Sobre a Scenario"
+        tools:layout="@layout/fragment_about"/>
 </navigation>

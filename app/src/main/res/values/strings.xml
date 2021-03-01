@@ -16,4 +16,12 @@
     <string name="address_not_registered">Endereço não cadastrado</string>
     <string name="modified_date">Modificado em:</string>
     <string name="user">Usuário:</string>
+    <string name="text_about">
+        A Scenario é uma indústria genuinamente brasileira que há mais de 25 anos desenvolve soluções para o crescente mercado de automação residencial.
+        \n\nSua missão ao longo desses anos tem sido o aperfeiçoamento de seus produtos e serviços, visando atender da melhor forma possível as necessidades do mercado e conquistar cada vez mais a satisfação de seus parceiros e consumidores finais.
+        \n\nPelo grande tempo de experiência no ramo, a Scenario apresenta produtos com alto grau de confiabilidade tanto no aspecto técnico quanto na capacidade de suporte e assistência técnica. Ela conta com uma rede de revendas parceiras altamente capacitadas para atender rapidamente seu público final.
+        \n\nPensando nas revendas parceiras, a Scenario busca desenvolver ferramentas para facilitar o trabalho de instalação além de oferecer treinamento e auxílio no projeto de automação para que possam caminhar com segurança. Desta forma, as revendas podem levar ao consumidor final todos os benefícios dos produtos e soluções Scenario, garantindo as melhores práticas e a satisfação do público final.
+    </string>
+    <string name="menu_about_title">Sobre</string>
+    <string name="cont_desc_image_about">Sobre Scenario Automation</string>
 </resources>
