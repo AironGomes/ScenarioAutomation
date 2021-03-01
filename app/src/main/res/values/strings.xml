@@ -14,4 +14,6 @@
     <string name="button_confirm">Confirmar</string>
     <string name="button_cancel">Cancelar</string>
     <string name="address_not_registered">Endereço não cadastrado</string>
+    <string name="modified_date">Modificado em:</string>
+    <string name="user">Usuário:</string>
 </resources>
