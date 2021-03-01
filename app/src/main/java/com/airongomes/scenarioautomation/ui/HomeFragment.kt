@@ -1,9 +1,7 @@
 package com.airongomes.scenarioautomation.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -58,8 +56,26 @@ class HomeFragment : Fragment(){
             callNewProjectFragment()
         }
 
+        setHasOptionsMenu(true)
+
         return binding.root
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_home, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.menu_about -> {
+                this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAboutFragment())
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
     /**
      * Chamar Fragmento: NewProjectFragment
