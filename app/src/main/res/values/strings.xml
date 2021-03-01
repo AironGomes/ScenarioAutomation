@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ScenarioProject</string>
+    <string name="app_name">Scenario</string>
     <string name="new_project">Acrescentar novo projeto</string>
     <string name="new_environment">Acrescentar novo ambiente</string>
     <string name="project_name">Nome do Projeto</string>
