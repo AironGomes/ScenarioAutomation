@@ -7,7 +7,7 @@ import com.airongomes.scenarioautomation.database.Project
 import com.airongomes.scenarioautomation.database.ProjectDao
 
 class HomeViewModel(dataSource: ProjectDao) : ViewModel() {
-
+    // Cria uma variável com a instância do ProjectDao
     private val database = dataSource
 
     // Livedata com lista de projetos
