@@ -6,14 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airongomes.scenarioautomation.database.Project
 import com.airongomes.scenarioautomation.databinding.ItemProjectBinding
 
-class RecyclerViewAdapter(var projectList: List<Project> = listOf()): RecyclerView.Adapter<AdapterViewHolder>() {
+class RecyclerViewAdapter(var projectList: List<Project> = listOf(),
+                          private val clickListener: ProjectClickListener): RecyclerView.Adapter<AdapterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterViewHolder {
         return AdapterViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
-        holder.bind(projectList[position])
+        holder.bind(projectList[position], clickListener)
     }
 
     override fun getItemCount(): Int {
@@ -23,9 +24,10 @@ class RecyclerViewAdapter(var projectList: List<Project> = listOf()): RecyclerVi
 
 class AdapterViewHolder private constructor(val binding: ItemProjectBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Project){
-        binding.project = item
+    fun bind(project: Project, clickListener: ProjectClickListener){
+        binding.project = project
         binding.executePendingBindings()
+        binding.clickListener = clickListener
     }
 
     companion object {
@@ -35,4 +37,13 @@ class AdapterViewHolder private constructor(val binding: ItemProjectBinding) : R
             return AdapterViewHolder(binding)
         }
     }
+}
+
+/**
+ * Classe criada para associar um ClickListener aos itens do recyclerview
+ */
+class ProjectClickListener(val clickListener: (projectId: Long) -> Unit) {
+
+    fun onClick(project: Project) = clickListener(project.projectId)
+
 }
