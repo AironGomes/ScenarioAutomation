@@ -45,16 +45,30 @@
             android:id="@+id/action_detailProjectFragment_to_detailEnvironmentFragment"
             app:destination="@id/detailEnvironmentFragment"
             app:popUpTo="@id/detailProjectFragment" />
+        <action
+            android:id="@+id/action_detailProjectFragment_to_newProjectFragment"
+            app:destination="@id/newProjectFragment"
+            app:popUpTo="@id/detailProjectFragment" />
+        <action
+            android:id="@+id/action_detailProjectFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment" />
+        <argument
+            android:name="projectId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/newProjectFragment"
         android:name="com.airongomes.scenarioautomation.ui.NewProjectFragment"
-        android:label="Adicionar Projeto"
-        tools:layout="@layout/fragment_new_project" >
+        android:label="Informações do Projeto"
+        tools:layout="@layout/fragment_new_project">
         <action
             android:id="@+id/action_newProjectFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment" />
+        <argument
+            android:name="projectId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/newDeviceFragment"
@@ -69,8 +83,8 @@
     <fragment
         android:id="@+id/newEnvironmentFragment"
         android:name="com.airongomes.scenarioautomation.ui.NewEnvironmentFragment"
-        android:label="Adicionar Ambiente"
-        tools:layout="@layout/fragment_new_environment" >
+        android:label="Informações do Ambiente"
+        tools:layout="@layout/fragment_new_environment">
         <action
             android:id="@+id/action_newEnvironmentFragment_to_detailProjectFragment"
             app:destination="@id/detailProjectFragment"
