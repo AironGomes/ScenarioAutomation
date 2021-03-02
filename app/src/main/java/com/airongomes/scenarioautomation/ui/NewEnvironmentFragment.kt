@@ -23,21 +23,21 @@ class NewEnvironmentFragment: Fragment() {
 
         // ClickListener para botão button_confirm
         binding.buttonConfirm.setOnClickListener {
-            callHomeFragment()
+            //callDetailProjectFragment()
         }
 
         // ClickListener para botão button_cancel
         binding.buttonCancel.setOnClickListener {
-            callHomeFragment()
+            //callDetailProjectFragment()
         }
 
         return binding.root
     }
 
     /**
-     * Chamar Fragmento: HomeFragment
+     * Chamar Fragmento: callDetailProjectFragment
      */
-    private fun callHomeFragment() {
-        this.findNavController().navigate(NewEnvironmentFragmentDirections.actionNewEnvironmentFragmentToDetailProjectFragment())
+    private fun callDetailProjectFragment(projectId: Long) {
+        this.findNavController().navigate(NewEnvironmentFragmentDirections.actionNewEnvironmentFragmentToDetailProjectFragment(projectId))
     }
 }
