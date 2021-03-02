@@ -7,12 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate
 import com.airongomes.scenarioautomation.R
-import com.airongomes.scenarioautomation.adapter.AdapterViewHolder
+import com.airongomes.scenarioautomation.adapter.ProjectClickListener
 import com.airongomes.scenarioautomation.adapter.RecyclerViewAdapter
-import com.airongomes.scenarioautomation.database.Project
 import com.airongomes.scenarioautomation.database.ProjectDatabase
 import com.airongomes.scenarioautomation.databinding.FragmentHomeBinding
 import com.airongomes.scenarioautomation.viewModel.HomeViewModel
@@ -39,7 +36,9 @@ class HomeFragment : Fragment(){
         val viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
 
         // Cria instancia de RecyclerViewAdapter
-        val adapter = RecyclerViewAdapter()
+        val adapter = RecyclerViewAdapter(listOf(), ProjectClickListener{ projectId ->
+            callDetailProjectFragment(projectId)
+        })
 
         // Adiciona adapter para o RecyclerView
         binding.recyclerViewProjects.adapter = adapter
@@ -76,18 +75,17 @@ class HomeFragment : Fragment(){
         }
     }
 
-
     /**
      * Chamar Fragmento: NewProjectFragment
      */
     private fun callNewProjectFragment() {
-        this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewProjectFragment())
+        this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewProjectFragment(-1L))
     }
 
     /**
      * Chamar Fragmento: DetailProjectFragment
      */
-    private fun callDetailProjectFragment() {
-        this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailProjectFragment())
+    private fun callDetailProjectFragment(projectId: Long) {
+        this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailProjectFragment(projectId))
     }
 }
