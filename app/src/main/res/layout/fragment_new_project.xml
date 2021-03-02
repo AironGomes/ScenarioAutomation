@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    
+    <data>
+        <variable
+            name="viewModel"
+            type="com.airongomes.scenarioautomation.viewModel.NewProjectViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,12 +21,13 @@
             style="@style/style_general_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title_new_project"
             android:textAlignment="center"
             android:textSize="32sp"
+            app:titleNewProject="@{viewModel.project}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/title_new_project"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/project_text_field"
@@ -34,7 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:hint="@string/project_name" />
+                android:hint="@string/project_name"
+                app:projectName="@{viewModel.project}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -49,7 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:hint="@string/edit_text_user" />
+                android:hint="@string/edit_text_user"
+                app:projectUser="@{viewModel.project}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -66,9 +75,9 @@
                 android:lines="3"
                 android:gravity="top"
                 android:hint="@string/edit_text_address"
-                android:layout_gravity="bottom" />
+                android:layout_gravity="bottom"
+                app:projectAddress="@{viewModel.project}"/>
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_type_of_project"
@@ -86,10 +95,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:checkedButton="@id/type_house"
+            android:layout_marginStart="8dp"
+            app:chooseTypeProject="@{viewModel.project}"
             app:layout_constraintTop_toBottomOf="@+id/text_type_of_project"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp">
+            tools:checkedButton="@id/type_house">
 
             <RadioButton
                 android:id="@+id/type_house"
