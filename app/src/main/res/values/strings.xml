@@ -7,6 +7,7 @@
     <string name="edit_text_user">Usuário</string>
     <string name="edit_text_address">Endereço</string>
     <string name="title_new_project">Novo Projeto</string>
+    <string name="title_edit_project">Editar Projeto</string>
     <string name="label_type_of_project">Escolha o tipo do projeto:</string>
     <string name="image_project_type">Tipo do Projeto</string>
     <string name="button_start">Iniciar</string>
@@ -22,6 +23,10 @@
         \n\nPelo grande tempo de experiência no ramo, a Scenario apresenta produtos com alto grau de confiabilidade tanto no aspecto técnico quanto na capacidade de suporte e assistência técnica. Ela conta com uma rede de revendas parceiras altamente capacitadas para atender rapidamente seu público final.
         \n\nPensando nas revendas parceiras, a Scenario busca desenvolver ferramentas para facilitar o trabalho de instalação além de oferecer treinamento e auxílio no projeto de automação para que possam caminhar com segurança. Desta forma, as revendas podem levar ao consumidor final todos os benefícios dos produtos e soluções Scenario, garantindo as melhores práticas e a satisfação do público final.
     </string>
-    <string name="menu_about_title">Sobre</string>
+    <string name="menu_about_text">Sobre</string>
+    <string name="menu_edit_text">Editar</string>
+    <string name="menu_delete_text">Excluir</string>
     <string name="cont_desc_image_about">Sobre Scenario Automation</string>
+    <string name="button_yes">Sim</string>
+    <string name="msg_confirm_delete_project">Deseja excluir este projeto e todo seu conteúdo?</string>
 </resources>

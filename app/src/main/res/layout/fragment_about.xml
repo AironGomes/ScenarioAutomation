@@ -27,12 +27,14 @@
                 android:scaleType="center"
                 android:contentDescription="@string/cont_desc_image_about"
                 android:background="@color/item_background"
+                android:elevation="3dp"
                 app:imageAbout="@{aboutInfo.imageUrl}"
                 tools:src="@drawable/scenario" />
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:paddingBottom="24dp"
                 android:clipToPadding="false">
 
@@ -56,6 +58,7 @@
             app:imageAbout="@{aboutInfo.imageUrl}"
             android:visibility="gone"
             tools:src="@drawable/scenario" />
+
     </FrameLayout>
 
 </layout>
