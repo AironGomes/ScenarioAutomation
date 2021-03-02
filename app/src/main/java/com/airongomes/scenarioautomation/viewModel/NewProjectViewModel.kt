@@ -10,14 +10,27 @@ import com.airongomes.scenarioautomation.database.ProjectDao
 import com.airongomes.scenarioautomation.utils.ProjectType
 import kotlinx.coroutines.launch
 
-class NewProjectViewModel(dataSource: ProjectDao) : ViewModel() {
+class NewProjectViewModel(dataSource: ProjectDao, projectId: Long) : ViewModel() {
 
     private val database = dataSource
+
+    // LiveData of project
+    var project: LiveData<Project>? = null
+
 
     // Livedata para fechar o fragmento
     private val _closeFragment = MutableLiveData<Boolean>()
     val closeFragment: LiveData<Boolean>
         get() = _closeFragment
+
+    /**
+     * Inicializa a livedata project se existir o projeto salvo no banco de dados
+     */
+    init {
+        if (projectId != -1L) {
+            project = database.getProject(projectId)
+        }
+    }
 
     /**
      * Responsável por Salvar os dados do projeto no banco de dados
@@ -33,19 +46,36 @@ class NewProjectViewModel(dataSource: ProjectDao) : ViewModel() {
             else -> ProjectType.BUILDING
         }
 
-        // Cria a entidade do banco de dados
-        val project = Project(
-                projectName = projectName,
-                userName = userName,
-                address = address,
-                type = typeEnum,
-                date = date)
+        if (project == null) {
+            // Cria a entidade do banco de dados
+            val projectData = Project(
+                    projectName = projectName,
+                    userName = userName,
+                    address = address,
+                    type = typeEnum,
+                    date = date)
 
-        // Insere a entidade no banco de dados usando corountine
-        viewModelScope.launch {
-            database.insertProject(project)
-            _closeFragment.value = true
+            // Insere a entidade no banco de dados usando corountine
+            viewModelScope.launch {
+                database.insertProject(projectData)
+            }
+        } else {
+            // Cria a entidade do banco de dados com o id do projeto recebido
+            val projectData = Project(
+                    projectId = project!!.value!!.projectId,
+                    projectName = projectName,
+                    userName = userName,
+                    address = address,
+                    type = typeEnum,
+                    date = date)
+
+            // Atualiza o projeto no banco de dados
+            viewModelScope.launch {
+                database.updateProject(projectData)
+            }
         }
+
+        _closeFragment.value = true
     }
 
     /**
