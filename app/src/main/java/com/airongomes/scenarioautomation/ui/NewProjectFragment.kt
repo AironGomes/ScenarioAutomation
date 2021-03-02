@@ -34,10 +34,14 @@ class NewProjectFragment : Fragment() {
         // Cria uma instância de database e adiciona o projectDao para viewModel
         val application = requireNotNull(this.activity).application
         val dataSource = ProjectDatabase.getInstance(application).projectDao
-        val viewModelFactory = NewProjectViewModelFactory(dataSource)
+        val arguments = DetailProjectFragmentArgs.fromBundle(requireArguments())
+        val viewModelFactory = NewProjectViewModelFactory(dataSource, arguments.projectId)
 
         // Cria instância de HomeViewModel
         viewModel = ViewModelProvider(this, viewModelFactory).get(NewProjectViewModel::class.java)
+
+        binding.viewModel = viewModel
+
 
         // ClickListener para botão Cancelar
         binding.buttonCancel.setOnClickListener { callHomeFragment() }
