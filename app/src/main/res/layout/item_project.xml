@@ -5,6 +5,10 @@
         <variable
             name="project"
             type="com.airongomes.scenarioautomation.database.Project" />
+
+        <variable
+            name="clickListener"
+            type="com.airongomes.scenarioautomation.adapter.ProjectClickListener" />
     </data>
     
     <com.google.android.material.card.MaterialCardView
@@ -14,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
+        android:onClick="@{() -> clickListener.onClick(project)}"
         android:layout_gravity="center"
         android:focusable="true"
         app:cardCornerRadius="30dp"
@@ -32,8 +37,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:contentDescription="@string/image_project_type"
-                android:src="@drawable/ic_home"
-                app:projectType="@{project.type}"/>
+                app:projectType="@{project.type}"
+                tools:src="@drawable/ic_home"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_project_name"
