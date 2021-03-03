@@ -31,6 +31,17 @@
             android:id="@+id/action_detailEnvironmentFragment_to_newDeviceFragment"
             app:destination="@id/newDeviceFragment"
             app:popUpTo="@id/detailEnvironmentFragment" />
+        <argument
+            android:name="environmentId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_detailEnvironmentFragment_to_newEnvironmentFragment"
+            app:destination="@id/newEnvironmentFragment"
+            app:popUpTo="@id/detailEnvironmentFragment" />
+        <action
+            android:id="@+id/action_detailEnvironmentFragment_to_detailProjectFragment"
+            app:destination="@id/detailProjectFragment"
+            app:popUpTo="@id/detailProjectFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailProjectFragment"
@@ -79,6 +90,9 @@
             android:id="@+id/action_newDeviceFragment_to_detailEnvironmentFragment"
             app:destination="@id/detailEnvironmentFragment"
             app:popUpTo="@id/detailProjectFragment" />
+        <argument
+            android:name="environmentId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/newEnvironmentFragment"
@@ -89,6 +103,12 @@
             android:id="@+id/action_newEnvironmentFragment_to_detailProjectFragment"
             app:destination="@id/detailProjectFragment"
             app:popUpTo="@id/homeFragment" />
+        <argument
+            android:name="environmentId"
+            app:argType="long" />
+        <argument
+            android:name="projectId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
