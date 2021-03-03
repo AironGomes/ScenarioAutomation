@@ -11,11 +11,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.airongomes.scenarioautomation.R
+import com.airongomes.scenarioautomation.adapter.EnvironmentAdapter
+import com.airongomes.scenarioautomation.adapter.EnvironmentClickListener
 import com.airongomes.scenarioautomation.database.ProjectDatabase
 import com.airongomes.scenarioautomation.databinding.FragmentDetailProjectBinding
 import com.airongomes.scenarioautomation.viewModel.DetailProjectViewModel
 import com.airongomes.scenarioautomation.viewModel.DetailProjectViewModelFactory
-import com.airongomes.scenarioautomation.viewModel.HomeViewModelFactory
 
 class DetailProjectFragment : Fragment() {
 
@@ -35,16 +36,44 @@ class DetailProjectFragment : Fragment() {
 
         // Cria uma instância de database e adiciona o projectDao para viewModel
         val application = requireNotNull(this.activity).application
-        val dataSource = ProjectDatabase.getInstance(application).projectDao
+        val projectSource = ProjectDatabase.getInstance(application).projectDao
+        val environmentSource = ProjectDatabase.getInstance(application).environmentDao
         arguments = DetailProjectFragmentArgs.fromBundle(requireArguments())
-        val viewModelFactory = DetailProjectViewModelFactory(dataSource, arguments.projectId)
+        val viewModelFactory = DetailProjectViewModelFactory(projectSource,environmentSource, arguments.projectId)
 
         // Cria instância do DetailProjectViewModel
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailProjectViewModel::class.java)
 
         binding.viewModel = viewModel
+
+        // Cria instancia de EnvironmentAdapter
+        val adapter = EnvironmentAdapter(listOf(), EnvironmentClickListener{ environmentId ->
+            callDetailEnvironmentFragment(environmentId)
+        })
+
+        // Adiciona adapter para o RecyclerView
+        binding.recyclerViewEnvironments.adapter = adapter
+
+        viewModel.environmentList.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.environmentList = it
+                adapter.notifyDataSetChanged()
+                binding.viewGroupNoEnvironment.visibility = View.GONE
+            }
+
+            if (it.isNullOrEmpty()) {
+                binding.viewGroupNoEnvironment.visibility = View.VISIBLE
+            }
+        })
+
+
         // ClickListener para botão fab_new_environment
         binding.fabNewEnvironment.setOnClickListener {
+            callNewEnvironmentFragment()
+        }
+
+        // ClickListener para viewGroupNoProject
+        binding.viewGroupNoEnvironment.setOnClickListener {
             callNewEnvironmentFragment()
         }
 
@@ -61,17 +90,17 @@ class DetailProjectFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_details, menu)
+        inflater.inflate(R.menu.menu_details_project, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
-            R.id.menu_edit -> {
-                this.findNavController().navigate(DetailProjectFragmentDirections.actionDetailProjectFragmentToNewProjectFragment(arguments.projectId))
+            R.id.menu_edit_project -> {
+                callNewProjectFragment()
                 true
             }
-            R.id.menu_delete -> {
+            R.id.menu_delete_project -> {
                 alertDialog()
                 true
             }
@@ -102,20 +131,32 @@ class DetailProjectFragment : Fragment() {
      * Chamar Fragmento: HomeFragment
      */
     private fun callHomeFragment() {
-        this.findNavController().navigate(DetailProjectFragmentDirections.actionDetailProjectFragmentToHomeFragment())
+        this.findNavController()
+                .navigate(DetailProjectFragmentDirections.actionDetailProjectFragmentToHomeFragment())
+    }
+
+    /**
+     * Chamar Fragmento: NewProjectFragment
+     */
+    private fun callNewProjectFragment() {
+        this.findNavController()
+                .navigate(DetailProjectFragmentDirections.actionDetailProjectFragmentToNewProjectFragment(arguments.projectId))
     }
 
     /**
      * Chamar Fragmento: NewEnvironmentFragment
      */
     private fun callNewEnvironmentFragment() {
-        this.findNavController().navigate(DetailProjectFragmentDirections.actionDetailProjectFragmentToNewEnvironmentFragment())
+        this.findNavController()
+                .navigate(DetailProjectFragmentDirections.actionDetailProjectFragmentToNewEnvironmentFragment(-1L, arguments.projectId))
     }
 
     /**
      * Chamar Fragmento: NewProjectFragment
      */
-    private fun callDetailEnvironmentFragment() {
-        this.findNavController().navigate(DetailProjectFragmentDirections.actionDetailProjectFragmentToDetailEnvironmentFragment())
+    private fun callDetailEnvironmentFragment(environmentId: Long) {
+        this.findNavController()
+                .navigate(DetailProjectFragmentDirections.actionDetailProjectFragmentToDetailEnvironmentFragment(environmentId))
     }
+
 }
