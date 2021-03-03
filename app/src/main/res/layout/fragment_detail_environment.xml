@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.airongomes.scenarioautomation.viewModel.DetailEnvironmentViewModel" />
+    </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -11,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- FALTA ALTERAR IMAGEM -->
             <ImageView
                 android:id="@+id/icon_type_of_environment"
                 android:layout_width="48dp"
@@ -19,7 +27,8 @@
                 android:src="@drawable/ic_home"
                 app:layout_constraintBottom_toBottomOf="@+id/title_environment"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/title_environment" />
+                app:layout_constraintTop_toTopOf="@+id/title_environment"
+                android:contentDescription="@string/environment_photo" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title_environment"
@@ -27,16 +36,16 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Nome do Ambiente"
+                android:text="@{viewModel.environment.environmentName}"
                 android:textSize="24sp"
                 app:layout_constraintStart_toEndOf="@+id/icon_type_of_environment"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Nome do Ambiente"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_devices"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +60,40 @@
             android:layout_gravity="end|bottom"
             android:src="@drawable/ic_add"
             android:contentDescription="@string/new_project" />
+
+        <!-- Apresentar mensagem caso não tenha nenhum dispositivo -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewGroup_no_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <ImageView
+                android:id="@+id/icone_no_project"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/ic_no_project"
+                android:layout_gravity="center"
+                android:contentDescription="@string/content_desc_first_device"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_no_project"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:text="@string/text_add_first_device"
+                app:layout_constraintTop_toBottomOf="@+id/icone_no_project"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

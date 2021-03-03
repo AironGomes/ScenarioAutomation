@@ -21,7 +21,7 @@
                 android:id="@+id/icon_type_of_project"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="32dp"
                 app:layout_constraintBottom_toBottomOf="@+id/title_project"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/title_project"
@@ -32,13 +32,15 @@
                 android:id="@+id/title_project"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
                 android:layout_marginTop="8dp"
-                android:textSize="24sp"
+                android:padding="8dp"
                 android:text="@{viewModel.project.projectName}"
+                android:textSize="24sp"
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/icon_type_of_project"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Nome do Projeto"/>
+                tools:text="Nome do Projeto" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_environments"
@@ -60,5 +62,39 @@
             android:layout_gravity="end|bottom"
             android:src="@drawable/ic_add"
             android:contentDescription="@string/new_environment" />
+
+        <!-- Apresentar mensagem caso não tenha nenhum ambiente -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewGroup_no_environment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <ImageView
+                android:id="@+id/icone_no_project"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/ic_no_project"
+                android:layout_gravity="center"
+                android:contentDescription="@string/content_desc_first_environment"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_no_project"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:text="@string/text_add_first_environment"
+                app:layout_constraintTop_toBottomOf="@+id/icone_no_project"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
