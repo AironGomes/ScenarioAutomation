@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.airongomes.scenarioautomation.R
 import com.airongomes.scenarioautomation.adapter.ProjectClickListener
-import com.airongomes.scenarioautomation.adapter.RecyclerViewAdapter
+import com.airongomes.scenarioautomation.adapter.ProjectAdapter
 import com.airongomes.scenarioautomation.database.ProjectDatabase
 import com.airongomes.scenarioautomation.databinding.FragmentHomeBinding
 import com.airongomes.scenarioautomation.viewModel.HomeViewModel
@@ -35,8 +35,8 @@ class HomeFragment : Fragment(){
         // Cria instância de HomeViewModel
         val viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
 
-        // Cria instancia de RecyclerViewAdapter
-        val adapter = RecyclerViewAdapter(listOf(), ProjectClickListener{ projectId ->
+        // Cria instancia de ProjectAdapter
+        val adapter = ProjectAdapter(listOf(), ProjectClickListener{ projectId ->
             callDetailProjectFragment(projectId)
         })
 
@@ -47,11 +47,21 @@ class HomeFragment : Fragment(){
             it?.let {
                 adapter.projectList = it
                 adapter.notifyDataSetChanged()
+                binding.viewGroupNoProject.visibility = View.GONE
+            }
+
+            if (it.isNullOrEmpty()) {
+                binding.viewGroupNoProject.visibility = View.VISIBLE
             }
         })
 
         // ClickListener para botão fab_new_project
         binding.fabNewProject.setOnClickListener {
+            callNewProjectFragment()
+        }
+
+        // ClickListener para viewGroupNoProject
+        binding.viewGroupNoProject.setOnClickListener {
             callNewProjectFragment()
         }
 
