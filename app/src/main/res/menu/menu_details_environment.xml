@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/menu_edit_environment"
+        android:title="@string/menu_edit_environment_title"
+        android:icon="@drawable/ic_edit"
+        android:orderInCategory="90"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_delete_environment"
+        android:title="@string/menu_delete_environment_title"
+        android:icon="@drawable/ic_delete"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+</menu>
