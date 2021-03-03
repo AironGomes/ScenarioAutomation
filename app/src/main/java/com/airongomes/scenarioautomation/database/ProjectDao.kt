@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 
+/** DAO para Projeto */
 @Dao
 interface ProjectDao {
 
@@ -23,4 +24,5 @@ interface ProjectDao {
 
     @Query("DELETE from project_list_table WHERE projectId = :projectId")
     suspend fun deleteProject(projectId: Long)
+
 }
