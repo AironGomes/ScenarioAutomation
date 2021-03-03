@@ -1,29 +1,28 @@
 package com.airongomes.scenarioautomation.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.airongomes.scenarioautomation.database.DeviceDao
 import com.airongomes.scenarioautomation.database.Environment
 import com.airongomes.scenarioautomation.database.EnvironmentDao
 import com.airongomes.scenarioautomation.database.Project
-import com.airongomes.scenarioautomation.database.ProjectDao
 import kotlinx.coroutines.launch
 
-class DetailProjectViewModel(
-    projectSource: ProjectDao,
+class DetailEnvironmentViewModel(
     environmentSource: EnvironmentDao,
-    val projectId: Long): ViewModel() {
+    deviceSource: DeviceDao,
+    val environmentId: Long): ViewModel() {
 
-    private val databaseProject = projectSource
     private val databaseEnvironment = environmentSource
+    private val databaseDevice = deviceSource
 
-    // LiveData do projeto
-    val project: LiveData<Project> = databaseProject.getProject(projectId)
+    // LiveData do ambiente
+    val environment: LiveData<Environment> = databaseEnvironment.getEnvironment(environmentId)
 
-    // LiveData de Lista de Ambientes
-    val environmentList = databaseEnvironment.getEnvironmentList(projectId)
+    // LiveData de Lista de dispositivos
+    val deviceList = databaseDevice.getDeviceList(environmentId)
 
     // Livedata para fechar o fragmento
     private val _closeFragment = MutableLiveData<Boolean>()
@@ -35,7 +34,7 @@ class DetailProjectViewModel(
      */
     fun deleteProject() {
         viewModelScope.launch {
-            databaseProject.deleteProject(projectId)
+            databaseEnvironment.deleteEnvironment(environmentId)
         }
         _closeFragment.value = true
     }

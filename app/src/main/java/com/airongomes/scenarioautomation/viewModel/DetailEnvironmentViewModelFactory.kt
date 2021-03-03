@@ -2,21 +2,21 @@ package com.airongomes.scenarioautomation.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.airongomes.scenarioautomation.database.DeviceDao
 import com.airongomes.scenarioautomation.database.EnvironmentDao
-import com.airongomes.scenarioautomation.database.ProjectDao
 
 /**
- * Entrega o ProjectDao para o ViewModel
+ * Entrega o DeviceDao para o ViewModel
  */
-class DetailProjectViewModelFactory(
-    private val projectSource: ProjectDao,
+class DetailEnvironmentViewModelFactory(
     private val environmentSource: EnvironmentDao,
-    private val projectId: Long
+    private val deviceSource: DeviceDao,
+    private val environmentId: Long
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(DetailProjectViewModel::class.java)) {
-            return DetailProjectViewModel(projectSource, environmentSource, projectId) as T
+        if (modelClass.isAssignableFrom(DetailEnvironmentViewModel::class.java)) {
+            return DetailEnvironmentViewModel(environmentSource, deviceSource, environmentId) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
