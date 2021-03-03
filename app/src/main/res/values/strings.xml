@@ -12,6 +12,8 @@
     <string name="image_project_type">Tipo do Projeto</string>
     <string name="button_start">Iniciar</string>
     <string name="message_project_name_or_user_is_blank">Os campos \'Nome do Projeto\' e \'Usuário\' não podem ficar vazios.</string>
+    <string name="message_environment_name_is_blank">O campo \'Nome do Ambiente\' não pode ficar vazio.</string>
+    <string name="message_device_name_is_blank">O campo \'Nome do Dispositivo\' não pode ficar vazio.</string>
     <string name="button_confirm">Confirmar</string>
     <string name="button_cancel">Cancelar</string>
     <string name="address_not_registered">Endereço não cadastrado</string>
@@ -24,9 +26,20 @@
         \n\nPensando nas revendas parceiras, a Scenario busca desenvolver ferramentas para facilitar o trabalho de instalação além de oferecer treinamento e auxílio no projeto de automação para que possam caminhar com segurança. Desta forma, as revendas podem levar ao consumidor final todos os benefícios dos produtos e soluções Scenario, garantindo as melhores práticas e a satisfação do público final.
     </string>
     <string name="menu_about_text">Sobre</string>
-    <string name="menu_edit_text">Editar</string>
-    <string name="menu_delete_text">Excluir</string>
+    <string name="menu_edit_project_title">Editar Projeto</string>
+    <string name="menu_delete_project_title">Excluir Projeto</string>
+    <string name="menu_edit_environment_title">Editar Ambiente</string>
+    <string name="menu_delete_environment_title">Excluir Ambiente</string>
     <string name="cont_desc_image_about">Sobre Scenario Automation</string>
     <string name="button_yes">Sim</string>
-    <string name="msg_confirm_delete_project">Deseja excluir este projeto e todo seu conteúdo?</string>
+    <string name="msg_confirm_delete_project">Você tem certeza que deseja excluir este projeto e todo seu conteúdo?</string>
+    <string name="msg_confirm_delete_environment">Você tem certeza que deseja excluir este ambiente e o todo seu conteúdo?</string>
+    <string name="msg_confirm_delete_device">Você tem certeza que deseja excluir este dispositivo?</string>
+    <string name="content_desc_first_project">Criar projeto</string>
+    <string name="text_add_first_project">Clique aqui para adicionar o primeiro projeto</string>
+    <string name="content_desc_first_environment">Adicionar ambiente</string>
+    <string name="text_add_first_environment">Vamos adicionar um ambiente?</string>
+    <string name="content_desc_first_device">Adicionar dispositivo</string>
+    <string name="text_add_first_device">Vamos adicionar um dispositivo?</string>
+    <string name="environment_photo">Foto do Ambiente</string>
 </resources>
