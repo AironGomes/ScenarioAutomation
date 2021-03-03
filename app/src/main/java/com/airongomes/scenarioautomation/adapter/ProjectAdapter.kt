@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airongomes.scenarioautomation.database.Project
 import com.airongomes.scenarioautomation.databinding.ItemProjectBinding
 
-class RecyclerViewAdapter(var projectList: List<Project> = listOf(),
-                          private val clickListener: ProjectClickListener): RecyclerView.Adapter<AdapterViewHolder>() {
+class ProjectAdapter(var projectList: List<Project> = listOf(),
+                     private val clickListener: ProjectClickListener): RecyclerView.Adapter<ProjectViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterViewHolder {
-        return AdapterViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
+        return ProjectViewHolder.from(parent)
     }
 
-    override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
         holder.bind(projectList[position], clickListener)
     }
 
@@ -22,7 +22,7 @@ class RecyclerViewAdapter(var projectList: List<Project> = listOf(),
     }
 }
 
-class AdapterViewHolder private constructor(val binding: ItemProjectBinding) : RecyclerView.ViewHolder(binding.root) {
+class ProjectViewHolder private constructor(val binding: ItemProjectBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(project: Project, clickListener: ProjectClickListener){
         binding.project = project
@@ -31,10 +31,10 @@ class AdapterViewHolder private constructor(val binding: ItemProjectBinding) : R
     }
 
     companion object {
-        fun from(parent: ViewGroup) : AdapterViewHolder{
+        fun from(parent: ViewGroup) : ProjectViewHolder{
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = ItemProjectBinding.inflate(layoutInflater, parent, false)
-            return AdapterViewHolder(binding)
+            return ProjectViewHolder(binding)
         }
     }
 }
