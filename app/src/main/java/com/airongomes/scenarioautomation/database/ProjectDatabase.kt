@@ -7,11 +7,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 
-@Database(entities = [Project::class], version = 2, exportSchema = false)
+@Database(entities = [Project::class, Environment::class, Device::class], version = 4, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class ProjectDatabase: RoomDatabase() {
 
     abstract val projectDao: ProjectDao
+    abstract val environmentDao: EnvironmentDao
+    abstract val deviceDao: DeviceDao
 
     companion object {
 
