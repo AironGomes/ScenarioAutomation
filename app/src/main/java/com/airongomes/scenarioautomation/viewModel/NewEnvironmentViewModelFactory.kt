@@ -10,12 +10,13 @@ import com.airongomes.scenarioautomation.database.ProjectDao
  */
 class NewEnvironmentViewModelFactory(
     private val dataSource: EnvironmentDao,
+    private val environmentId: Long,
     private val projectId: Long
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NewEnvironmentViewModel::class.java)) {
-            return NewEnvironmentViewModel(dataSource, projectId) as T
+            return NewEnvironmentViewModel(dataSource, environmentId, projectId) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

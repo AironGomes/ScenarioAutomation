@@ -37,20 +37,20 @@ class NewEnvironmentFragment: Fragment() {
     // Registrar callback para acessar galeria de imagens
     var galleryContent: ActivityResultLauncher<String> = registerForActivityResult(ActivityResultContracts.GetContent(),
             ActivityResultCallback { result ->
-                image_uri = result
-                getImage(image_uri)
+                imageUri = result
+                getImage(imageUri)
             })
 
     // Registrar callback para acessar a câmera
     var cameraContent: ActivityResultLauncher<Uri> = registerForActivityResult(TakePicture(),
             ActivityResultCallback { result ->
                 if (result) {
-                    getImage(image_uri)
+                    getImage(imageUri)
                 }
             })
 
     // Variável para imagem Uri
-    var image_uri: Uri? = null
+    private var imageUri: Uri? = null
 
 
     override fun onCreateView(
@@ -66,10 +66,12 @@ class NewEnvironmentFragment: Fragment() {
         val application = requireNotNull(this.activity).application
         val dataSource = ProjectDatabase.getInstance(application).environmentDao
         arguments = NewEnvironmentFragmentArgs.fromBundle(requireArguments())
-        val viewModelFactory = NewEnvironmentViewModelFactory(dataSource, arguments.projectId)
+        val viewModelFactory = NewEnvironmentViewModelFactory(dataSource, arguments.environmentId, arguments.projectId)
 
         // Cria instância do DetailProjectViewModel
         viewModel = ViewModelProvider(this, viewModelFactory).get(NewEnvironmentViewModel::class.java)
+
+        binding.viewModel = viewModel
 
         // ClickListener para botão button_confirm
         binding.buttonConfirm.setOnClickListener { saveEnvironment() }
@@ -105,7 +107,7 @@ class NewEnvironmentFragment: Fragment() {
                     Toast.LENGTH_LONG
             ).show()
         }
-        else viewModel.saveEnvironment(environmentName, image_uri.toString())
+        else viewModel.saveEnvironment(environmentName, imageUri?.toString())
     }
 
     /**
@@ -160,7 +162,7 @@ class NewEnvironmentFragment: Fragment() {
         } else {
             // Permissão Concedida
             createFile()
-            cameraContent.launch(image_uri)
+            cameraContent.launch(imageUri)
 
         }
 
@@ -197,6 +199,6 @@ class NewEnvironmentFragment: Fragment() {
         val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, "Nova foto")
         values.put(MediaStore.Images.Media.DESCRIPTION, "Imagem capturada pela camera")
-        image_uri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        imageUri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
     }
 }
