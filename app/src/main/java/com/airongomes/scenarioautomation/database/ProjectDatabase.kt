@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 
-@Database(entities = [Project::class, Environment::class, Device::class], version = 4, exportSchema = false)
+@Database(entities = [Project::class, Environment::class, Device::class], version = 5, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class ProjectDatabase: RoomDatabase() {
 
