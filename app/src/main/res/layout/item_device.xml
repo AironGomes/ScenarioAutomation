@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -7,27 +9,40 @@
             type="com.airongomes.scenarioautomation.database.Device" />
     </data>
 
-    <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_margin="4dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_device_name"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:text="@{device.deviceName}"
+            android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:padding="4dp"
-            android:singleLine="true"
-            android:textAlignment="center"
-            android:ellipsize="marquee"
-            android:text="@{device.deviceName}"
-            tools:text="Nome do Dispositivo"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/icon_delete_device"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Nome do Dispositivo" />
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/icon_delete_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:contentDescription="@string/button_delete_device"
+            android:padding="4dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
