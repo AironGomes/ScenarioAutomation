@@ -9,29 +9,12 @@ import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.airongomes.scenarioautomation.R
+import com.airongomes.scenarioautomation.database.Environment
 import com.airongomes.scenarioautomation.database.Project
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.stream.MediaStoreImageThumbLoader
 import com.bumptech.glide.request.RequestOptions
 import java.util.*
-
-/** --------- Adapter para Item Environment ------------ */
-@BindingAdapter("imageEnvironment")
-fun ImageView.imageEnvironment(imageUriString: String?){
-    imageUriString?.let {
-        val imageUri = Uri.parse(imageUriString)
-        Glide.with(context)
-                .load(imageUri)
-                .apply(
-                        RequestOptions()
-                                .error(R.drawable.ic_broken))
-                .into(this)
-
-    }
-//    if (imageUrl == null) {
-//        setImageResource(R.drawable.ic_image)
-//    }
-}
 
 /** --------- Adapter para Item Project ------------ */
 @BindingAdapter("projectUser")
@@ -132,4 +115,34 @@ fun RadioGroup.chooseTypeProject(project: Project?){
                 }
             }
     )
+}
+
+/** --------- Adapter para New Environment ------------ */
+@BindingAdapter("environmentName")
+fun TextView.environmentName(environment: Environment?){
+    environment?.let {
+        text = environment.environmentName
+    }
+}
+
+/** --------- Adapter para New Environment & Item Environment ------------ */
+
+@BindingAdapter("imageEnvironment")
+fun ImageView.imageEnvironment(environment: Environment?){
+    environment?.let {
+        if (it.imageUri != null) {
+            val imageUri = Uri.parse(it.imageUri)
+            Glide.with(context)
+                    .load(imageUri)
+                    .apply(
+                            RequestOptions()
+                                    .error(R.drawable.ic_broken)
+
+                    )
+                    .into(this)
+        }
+    }
+    if (environment?.imageUri == null) {
+        setImageResource(R.drawable.ic_image)
+    }
 }
