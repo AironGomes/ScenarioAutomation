@@ -1,20 +1,20 @@
 package com.airongomes.scenarioautomation.viewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
 import com.airongomes.scenarioautomation.database.Device
 import com.airongomes.scenarioautomation.database.DeviceDao
 import com.airongomes.scenarioautomation.database.Environment
+import com.airongomes.scenarioautomation.database.ProjectDatabase
+import com.airongomes.scenarioautomation.repository.Repository
 import kotlinx.coroutines.launch
 
 class NewDeviceViewModel(
-    dataSource: DeviceDao,
-    val environmentId: Long
-): ViewModel() {
+    application: Application,
+    val environmentId: Long): AndroidViewModel(application) {
 
-    private val database = dataSource
+    // Instância do repositório
+    private val repository = Repository(application)
 
     // Livedata para fechar o fragmento
     private val _closeFragment = MutableLiveData<Boolean>()
@@ -34,7 +34,7 @@ class NewDeviceViewModel(
             environmentId = environmentId)
 
         viewModelScope.launch {
-            database.insertDevice(deviceData)
+            repository.insertDevice(deviceData)
         }
 
         _closeFragment.value = true

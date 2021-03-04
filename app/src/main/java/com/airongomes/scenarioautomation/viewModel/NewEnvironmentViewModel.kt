@@ -1,20 +1,21 @@
 package com.airongomes.scenarioautomation.viewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
 import com.airongomes.scenarioautomation.database.Environment
 import com.airongomes.scenarioautomation.database.EnvironmentDao
 import com.airongomes.scenarioautomation.database.Project
+import com.airongomes.scenarioautomation.database.ProjectDatabase
+import com.airongomes.scenarioautomation.repository.Repository
 import kotlinx.coroutines.launch
 
 class NewEnvironmentViewModel(
-    dataSource: EnvironmentDao,
+    application: Application,
     val environmentId: Long,
-    val projectId: Long): ViewModel() {
+    val projectId: Long): AndroidViewModel(application) {
 
-    private val database = dataSource
+    // Instância do repositório
+    private val repository = Repository(application)
 
     // LiveData do ambiente
     var environment: LiveData<Environment>? = null
@@ -25,11 +26,11 @@ class NewEnvironmentViewModel(
         get() = _closeFragment
 
     /**
-     * Inicializa a livedata project se existir o projeto salvo no banco de dados
+     * Inicializa a livedata environment se existir o ambiente salvo no banco de dados
      */
     init {
         if (environmentId != -1L) {
-            environment = database.getEnvironment(environmentId)
+            environment = repository.getEnvironment(environmentId)
         }
     }
 
@@ -47,7 +48,7 @@ class NewEnvironmentViewModel(
                     projectId = projectId)
 
             viewModelScope.launch {
-                database.insertEnvironment(environmentData)
+                repository.insertEnvironment(environmentData)
             }
         } else {
             val environmentData = Environment(
@@ -57,7 +58,7 @@ class NewEnvironmentViewModel(
                     projectId = projectId)
 
             viewModelScope.launch {
-                database.updateEnvironment(environmentData)
+                repository.updateEnvironment(environmentData)
             }
         }
 

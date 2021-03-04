@@ -36,10 +36,8 @@ class DetailProjectFragment : Fragment() {
 
         // Cria uma instância de database e adiciona o projectDao para viewModel
         val application = requireNotNull(this.activity).application
-        val projectSource = ProjectDatabase.getInstance(application).projectDao
-        val environmentSource = ProjectDatabase.getInstance(application).environmentDao
         arguments = DetailProjectFragmentArgs.fromBundle(requireArguments())
-        val viewModelFactory = DetailProjectViewModelFactory(projectSource,environmentSource, arguments.projectId)
+        val viewModelFactory = DetailProjectViewModelFactory(application, arguments.projectId)
 
         // Cria instância do DetailProjectViewModel
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailProjectViewModel::class.java)

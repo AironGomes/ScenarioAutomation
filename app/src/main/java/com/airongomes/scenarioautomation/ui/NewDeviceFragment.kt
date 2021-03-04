@@ -36,9 +36,8 @@ class NewDeviceFragment: Fragment() {
 
         // Cria uma instância de database e adiciona o projectDao para viewModel
         val application = requireNotNull(this.activity).application
-        val dataSource = ProjectDatabase.getInstance(application).deviceDao
         arguments = NewDeviceFragmentArgs.fromBundle(requireArguments())
-        val viewModelFactory = NewDeviceViewModelFactory(dataSource, arguments.environmentId)
+        val viewModelFactory = NewDeviceViewModelFactory(application, arguments.environmentId)
 
         // Cria instância do DetailProjectViewModel
         viewModel = ViewModelProvider(this, viewModelFactory).get(NewDeviceViewModel::class.java)

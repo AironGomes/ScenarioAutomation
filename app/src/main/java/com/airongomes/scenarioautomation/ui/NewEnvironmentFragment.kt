@@ -64,9 +64,8 @@ class NewEnvironmentFragment: Fragment() {
 
         // Cria uma instância de database e adiciona o projectDao para viewModel
         val application = requireNotNull(this.activity).application
-        val dataSource = ProjectDatabase.getInstance(application).environmentDao
         arguments = NewEnvironmentFragmentArgs.fromBundle(requireArguments())
-        val viewModelFactory = NewEnvironmentViewModelFactory(dataSource, arguments.environmentId, arguments.projectId)
+        val viewModelFactory = NewEnvironmentViewModelFactory(application, arguments.environmentId, arguments.projectId)
 
         // Cria instância do DetailProjectViewModel
         viewModel = ViewModelProvider(this, viewModelFactory).get(NewEnvironmentViewModel::class.java)

@@ -39,10 +39,8 @@ class DetailEnvironmentFragment: Fragment() {
 
         // Cria uma instância de database e adiciona o projectDao para viewModel
         val application = requireNotNull(this.activity).application
-        val environmentSource = ProjectDatabase.getInstance(application).environmentDao
-        val deviceSource = ProjectDatabase.getInstance(application).deviceDao
         arguments = DetailEnvironmentFragmentArgs.fromBundle(requireArguments())
-        val viewModelFactory = DetailEnvironmentViewModelFactory(environmentSource, deviceSource, arguments.environmentId)
+        val viewModelFactory = DetailEnvironmentViewModelFactory(application, arguments.environmentId)
 
         // Cria instância do DetailProjectViewModel
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailEnvironmentViewModel::class.java)
@@ -128,7 +126,7 @@ class DetailEnvironmentFragment: Fragment() {
     }
 
     /**
-     * Cria um Alert Dialog com mensagem de confirmação de exclusão do projeto
+     * Cria um Alert Dialog com mensagem de confirmação de exclusão do ambiente
      */
     private fun alertDialog() {
         // Cria um Alert Dialog
@@ -136,8 +134,8 @@ class DetailEnvironmentFragment: Fragment() {
         builder.setMessage(getString(R.string.msg_confirm_delete_environment))
         builder.setPositiveButton(getString(R.string.button_yes),
             DialogInterface.OnClickListener { dialog, id ->
-                // Exclui projeto do banco de dados
-                viewModel.deleteProject()
+                // Exclui ambiente do banco de dados
+                viewModel.deleteEnvironment()
             })
         builder.setNegativeButton(R.string.button_cancel,
             DialogInterface.OnClickListener { dialog, id ->

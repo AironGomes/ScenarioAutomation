@@ -1,18 +1,21 @@
 package com.airongomes.scenarioautomation.viewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
 import com.airongomes.scenarioautomation.R
 import com.airongomes.scenarioautomation.database.Project
 import com.airongomes.scenarioautomation.database.ProjectDao
+import com.airongomes.scenarioautomation.database.ProjectDatabase
+import com.airongomes.scenarioautomation.repository.Repository
 import com.airongomes.scenarioautomation.utils.ProjectType
 import kotlinx.coroutines.launch
 
-class NewProjectViewModel(dataSource: ProjectDao, projectId: Long) : ViewModel() {
+class NewProjectViewModel(
+        application: Application,
+        projectId: Long) : AndroidViewModel(application) {
 
-    private val database = dataSource
+    // Instância do repositório
+    private val repository = Repository(application)
 
     // LiveData of project
     var project: LiveData<Project>? = null
@@ -28,7 +31,7 @@ class NewProjectViewModel(dataSource: ProjectDao, projectId: Long) : ViewModel()
      */
     init {
         if (projectId != -1L) {
-            project = database.getProject(projectId)
+            project = repository.getProject(projectId)
         }
     }
 
@@ -57,7 +60,7 @@ class NewProjectViewModel(dataSource: ProjectDao, projectId: Long) : ViewModel()
 
             // Insere a entidade no banco de dados usando corountine
             viewModelScope.launch {
-                database.insertProject(projectData)
+                repository.insertProject(projectData)
             }
         } else {
             // Cria a entidade do banco de dados com o id do projeto recebido
@@ -71,7 +74,7 @@ class NewProjectViewModel(dataSource: ProjectDao, projectId: Long) : ViewModel()
 
             // Atualiza o projeto no banco de dados
             viewModelScope.launch {
-                database.updateProject(projectData)
+                repository.updateProject(projectData)
             }
         }
 

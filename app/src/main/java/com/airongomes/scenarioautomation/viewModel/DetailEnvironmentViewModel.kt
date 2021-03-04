@@ -1,28 +1,23 @@
 package com.airongomes.scenarioautomation.viewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.airongomes.scenarioautomation.database.DeviceDao
-import com.airongomes.scenarioautomation.database.Environment
-import com.airongomes.scenarioautomation.database.EnvironmentDao
-import com.airongomes.scenarioautomation.database.Project
+import android.app.Application
+import androidx.lifecycle.*
+import com.airongomes.scenarioautomation.database.*
+import com.airongomes.scenarioautomation.repository.Repository
 import kotlinx.coroutines.launch
 
 class DetailEnvironmentViewModel(
-    environmentSource: EnvironmentDao,
-    deviceSource: DeviceDao,
-    val environmentId: Long): ViewModel() {
+    application: Application,
+    val environmentId: Long): AndroidViewModel(application) {
 
-    private val databaseEnvironment = environmentSource
-    private val databaseDevice = deviceSource
+    // Instância do repositório
+    private val repository = Repository(application)
 
     // LiveData do ambiente
-    val environment: LiveData<Environment> = databaseEnvironment.getEnvironment(environmentId)
+    val environment: LiveData<Environment> = repository.getEnvironment(environmentId)
 
     // LiveData de Lista de dispositivos
-    val deviceList = databaseDevice.getDeviceList(environmentId)
+    val deviceList = repository.getDeviceList(environmentId)
 
     // Livedata para fechar o fragmento
     private val _closeFragment = MutableLiveData<Boolean>()
@@ -30,11 +25,11 @@ class DetailEnvironmentViewModel(
         get() = _closeFragment
 
     /**
-     * Exclui projeto do banco de dados
+     * Exclui ambiente do banco de dados
      */
-    fun deleteProject() {
+    fun deleteEnvironment() {
         viewModelScope.launch {
-            databaseEnvironment.deleteEnvironment(environmentId)
+            repository.deleteEnvironment(environmentId)
         }
         _closeFragment.value = true
     }
