@@ -26,6 +26,7 @@ class DetailEnvironmentFragment: Fragment() {
     lateinit var viewModel: DetailEnvironmentViewModel
     lateinit var arguments: DetailEnvironmentFragmentArgs
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,8 +48,10 @@ class DetailEnvironmentFragment: Fragment() {
 
         binding.viewModel = viewModel
 
-        // Cria instancia de EnvironmentAdapter
-        val adapter = DeviceAdapter(listOf())
+        // Cria instância de EnvironmentAdapter
+        val adapter = DeviceAdapter(listOf(), DeviceClickListener { deviceId ->
+            viewModel.deleteDevice(deviceId)
+        })
 
         // Adiciona adapter para o RecyclerView
         binding.recyclerViewDevices.adapter = adapter
@@ -118,7 +121,7 @@ class DetailEnvironmentFragment: Fragment() {
                 true
             }
             R.id.menu_delete_environment -> {
-                alertDialog()
+                alertDialogDeleteEnvironment()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -128,13 +131,13 @@ class DetailEnvironmentFragment: Fragment() {
     /**
      * Cria um Alert Dialog com mensagem de confirmação de exclusão do ambiente
      */
-    private fun alertDialog() {
+    private fun alertDialogDeleteEnvironment() {
         // Cria um Alert Dialog
         val builder = AlertDialog.Builder(context)
         builder.setMessage(getString(R.string.msg_confirm_delete_environment))
         builder.setPositiveButton(getString(R.string.button_yes),
             DialogInterface.OnClickListener { dialog, id ->
-                // Exclui ambiente do banco de dados
+                // Exclui o ambiente atual
                 viewModel.deleteEnvironment()
             })
         builder.setNegativeButton(R.string.button_cancel,

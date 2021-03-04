@@ -35,6 +35,15 @@ class DetailEnvironmentViewModel(
     }
 
     /**
+     * Exclui dispositivo do banco de dados
+     */
+    fun deleteDevice(deviceId: Long) {
+        viewModelScope.launch {
+            repository.deleteDevice(deviceId)
+        }
+    }
+
+    /**
      * Reseta o Livedata closeFragment
      */
     fun closeFragmentObserved() {
