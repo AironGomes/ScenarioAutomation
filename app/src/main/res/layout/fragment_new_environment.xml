@@ -36,15 +36,16 @@
             app:layout_constraintTop_toBottomOf="@+id/environment_text_field" />
 
         <Button
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:id="@+id/button_take_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Foto"
+            android:text="@string/text_photo"
             app:icon="@drawable/ic_camera"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_confirm"
