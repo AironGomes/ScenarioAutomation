@@ -23,13 +23,14 @@ class NewEnvironmentViewModel(
     /**
     * Responsável por Salvar os dados do ambiente no banco de dados
     */
-    fun saveEnvironment(environmentName: String) {
+    fun saveEnvironment(environmentName: String, imageUriString: String) {
         // Pega a data atual em milissegundos
         val date = System.currentTimeMillis() // TODO: ATUALIZAR DATA
 
         val environmentData = Environment(
-            environmentName = environmentName,
-            projectId = projectId)
+                environmentName = environmentName,
+                imageUri = imageUriString,
+                projectId = projectId)
 
         viewModelScope.launch {
             database.insertEnvironment(environmentData)
