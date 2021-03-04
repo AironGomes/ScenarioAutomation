@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.airongomes.scenarioautomation.viewModel.NewEnvironmentViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,7 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/environment_name"
-                android:singleLine="true" />
+                android:singleLine="true"
+                app:environmentName="@{viewModel.environment}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
@@ -30,10 +37,14 @@
             android:layout_margin="16dp"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="@color/black"
+            android:background="@color/item_background"
+            android:contentDescription="@string/environment_photo"
+            android:scaleType="centerCrop"
+            app:imageEnvironment="@{viewModel.environment}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/environment_text_field" />
+            app:layout_constraintTop_toBottomOf="@+id/environment_text_field"
+            tools:src="@drawable/ic_image" />
 
         <Button
             android:id="@+id/button_take_picture"
