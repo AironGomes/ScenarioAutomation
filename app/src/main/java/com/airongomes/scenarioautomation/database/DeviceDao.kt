@@ -14,7 +14,7 @@ interface DeviceDao {
     suspend fun insertDevice(device: Device)
 
     @Update
-    suspend fun updateEnvironment(device: Device)
+    suspend fun updateDevice(device: Device)
 
     @Query("SELECT * from device_list_table WHERE deviceId = :deviceId")
     fun getDevice(deviceId: Long): LiveData<Device>
