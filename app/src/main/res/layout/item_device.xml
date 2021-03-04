@@ -7,6 +7,10 @@
         <variable
             name="device"
             type="com.airongomes.scenarioautomation.database.Device" />
+
+        <variable
+            name="clickListener"
+            type="com.airongomes.scenarioautomation.adapter.DeviceClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,6 +44,7 @@
             android:contentDescription="@string/button_delete_device"
             android:padding="4dp"
             android:src="@drawable/ic_close"
+            android:onClick="@{() -> clickListener.onClick(device)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
