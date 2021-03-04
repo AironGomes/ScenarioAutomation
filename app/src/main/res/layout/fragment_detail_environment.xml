@@ -18,17 +18,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- FALTA ALTERAR IMAGEM -->
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/icon_type_of_environment"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
-                android:src="@drawable/ic_home"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/environment_photo"
+                android:background="#BCBABA"
+                app:imageEnvironment="@{viewModel.environment}"
                 app:layout_constraintBottom_toBottomOf="@+id/title_environment"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/title_environment"
-                android:contentDescription="@string/environment_photo" />
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                tools:src="@drawable/ic_image"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title_environment"
