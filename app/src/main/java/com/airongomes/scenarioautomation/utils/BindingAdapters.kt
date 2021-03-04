@@ -1,5 +1,6 @@
 package com.airongomes.scenarioautomation.utils
 
+import android.net.Uri
 import android.text.format.DateFormat
 import android.util.Log
 import android.widget.ImageView
@@ -13,6 +14,24 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.stream.MediaStoreImageThumbLoader
 import com.bumptech.glide.request.RequestOptions
 import java.util.*
+
+/** --------- Adapter para Item Environment ------------ */
+@BindingAdapter("imageEnvironment")
+fun ImageView.imageEnvironment(imageUriString: String?){
+    imageUriString?.let {
+        val imageUri = Uri.parse(imageUriString)
+        Glide.with(context)
+                .load(imageUri)
+                .apply(
+                        RequestOptions()
+                                .error(R.drawable.ic_broken))
+                .into(this)
+
+    }
+//    if (imageUrl == null) {
+//        setImageResource(R.drawable.ic_image)
+//    }
+}
 
 /** --------- Adapter para Item Project ------------ */
 @BindingAdapter("projectUser")
