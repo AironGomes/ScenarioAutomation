@@ -13,5 +13,6 @@ data class Environment(
         @PrimaryKey(autoGenerate = true)
         val environmentId: Long = 0L,
         val environmentName: String = "",
+        val imageUri: String? = null,
         val projectId: Long
 )
