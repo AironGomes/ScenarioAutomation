@@ -41,7 +41,6 @@
     <string name="text_add_first_environment">Vamos adicionar um ambiente?</string>
     <string name="content_desc_first_device">Adicionar dispositivo</string>
     <string name="text_add_first_device">Vamos adicionar um dispositivo?</string>
-    <string name="environment_photo">Foto do Ambiente</string>
     <string name="text_photo">Foto</string>
     <string name="char_sequence_take_photo">Abrir Câmera</string>
     <string name="char_sequence_open_gallery">Escolher da Galeria</string>
@@ -50,4 +49,5 @@
     <string name="toast_no_permission_gallery">Permissão negada! Não é possível acessar a galeria de imagens.</string>
     <string name="toast_no_permission_camera">Permissão negada! Não é possível acessar a câmera.</string>
     <string name="button_delete_device">Excluir Dispositivo</string>
+    <string name="environment_photo">Foto do Ambiente</string>
 </resources>
