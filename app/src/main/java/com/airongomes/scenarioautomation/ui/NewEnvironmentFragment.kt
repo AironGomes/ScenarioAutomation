@@ -25,6 +25,7 @@ import com.airongomes.scenarioautomation.database.ProjectDatabase
 import com.airongomes.scenarioautomation.databinding.FragmentNewEnvironmentBinding
 import com.airongomes.scenarioautomation.viewModel.NewEnvironmentViewModel
 import com.airongomes.scenarioautomation.viewModel.NewEnvironmentViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 
 class NewEnvironmentFragment: Fragment() {
@@ -37,15 +38,14 @@ class NewEnvironmentFragment: Fragment() {
     // Registrar callback para acessar galeria de imagens
     var galleryContent: ActivityResultLauncher<String> = registerForActivityResult(ActivityResultContracts.GetContent(),
             ActivityResultCallback { result ->
-                imageUri = result
-                getImage(imageUri)
-            })
+                viewModel.setImageUri(result)
+                 })
 
     // Registrar callback para acessar a câmera
-    var cameraContent: ActivityResultLauncher<Uri> = registerForActivityResult(TakePicture(),
-            ActivityResultCallback { result ->
-                if (result) {
-                    getImage(imageUri)
+    val cameraContent: ActivityResultLauncher<Uri> = registerForActivityResult(TakePicture(),
+            ActivityResultCallback { resultUri ->
+                if (resultUri) {
+                    imageUri?.let { viewModel.setImageUri(it) }
                 }
             })
 
@@ -84,8 +84,20 @@ class NewEnvironmentFragment: Fragment() {
         // Observar o Livedata closeFragment
         viewModel.closeFragment.observe(viewLifecycleOwner, Observer {
             if (it == true) {
+                Snackbar.make(
+                        binding.viewGroupId,
+                        resources.getText(R.string.message_saved),
+                        Snackbar.LENGTH_SHORT
+                ).show()
                 callDetailProjectFragment(arguments.projectId)
                 viewModel.closeFragmentObserved()
+            }
+        })
+
+        // Observar o Livedata closeFragment
+        viewModel.environment?.observe(viewLifecycleOwner, Observer {
+            if (it.imageUri != null) {
+                viewModel.setImageUri(Uri.parse(it.imageUri))
             }
         })
 
@@ -106,7 +118,7 @@ class NewEnvironmentFragment: Fragment() {
                     Toast.LENGTH_LONG
             ).show()
         }
-        else viewModel.saveEnvironment(environmentName, imageUri?.toString())
+        else viewModel.saveEnvironment(environmentName)
     }
 
     /**
@@ -159,7 +171,7 @@ class NewEnvironmentFragment: Fragment() {
             // Permissão Negada
             Toast.makeText(requireContext(), getText(R.string.toast_no_permission_camera), Toast.LENGTH_SHORT).show()
         } else {
-            // Permissão Concedida
+            // Permissão Concedida - Cria o arquivo de imagem e chama a câmera
             createFile()
             cameraContent.launch(imageUri)
 
@@ -181,16 +193,6 @@ class NewEnvironmentFragment: Fragment() {
         }
     }
 
-
-    /**
-     * Define o conteúdo da imageView com a Uri recebida
-     */
-    private fun getImage(result: Uri?) {
-        if (result != null) {
-            binding.imageView.setImageURI(result)
-        }
-    }
-
     /**
      * Cria uma imagem uri
      */
@@ -199,5 +201,6 @@ class NewEnvironmentFragment: Fragment() {
         values.put(MediaStore.Images.Media.TITLE, "Nova foto")
         values.put(MediaStore.Images.Media.DESCRIPTION, "Imagem capturada pela camera")
         imageUri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+
     }
 }
