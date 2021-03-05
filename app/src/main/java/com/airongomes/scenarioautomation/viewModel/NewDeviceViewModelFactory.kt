@@ -12,12 +12,13 @@ import com.airongomes.scenarioautomation.database.ProjectDatabase
  */
 class NewDeviceViewModelFactory(
     private val application: Application,
-    private val environmentId: Long
+    private val environmentId: Long,
+    private val projectId: Long
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(NewDeviceViewModel::class.java)) {
-            return NewDeviceViewModel(application, environmentId) as T
+            return NewDeviceViewModel(application, environmentId, projectId) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
