@@ -13,7 +13,7 @@
     <string name="button_start">Iniciar</string>
     <string name="message_project_name_or_user_is_blank">Os campos \'Nome do Projeto\' e \'Usuário\' não podem ficar vazios.</string>
     <string name="message_environment_name_is_blank">O campo \'Nome do Ambiente\' não pode ficar vazio.</string>
-    <string name="message_device_name_is_blank">O campo \'Nome do Dispositivo\' não pode ficar vazio.</string>
+    <string name="message_device_name_is_blank">Os campos \'Nome do Dispositivo\' e \'Nome do Fabricante\' não podem ficar vazios.</string>
     <string name="button_confirm">Confirmar</string>
     <string name="button_cancel">Cancelar</string>
     <string name="address_not_registered">Endereço não cadastrado</string>
@@ -50,4 +50,15 @@
     <string name="toast_no_permission_camera">Permissão negada! Não é possível acessar a câmera.</string>
     <string name="button_delete_device">Excluir Dispositivo</string>
     <string name="environment_photo">Foto do Ambiente</string>
+    <string name="title_new_device">Adicionar Dispositivo</string>
+    <string name="text_switch_scenario">Dispositivo Scenario</string>
+    <string name="hint_manufacturer_name">Nome do Fabricante</string>
+    <string name="hint_device_name">Nome do Dispositivo</string>
+    <string name="message_saved">Salvo com sucesso!</string>
+
+    <string-array name="options_device">
+        <item>Módulo Iluminação</item>
+        <item>Teclados</item>
+        <item>Módulo Controle Cortina</item>
+    </string-array>
 </resources>
