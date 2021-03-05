@@ -11,6 +11,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/viewGroupId"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -40,7 +41,7 @@
             android:background="@color/item_background"
             android:contentDescription="@string/environment_photo"
             android:scaleType="centerCrop"
-            app:imageEnvironment="@{viewModel.environment}"
+            app:imageUri="@{viewModel.uriImage}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/environment_text_field"
@@ -65,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Confirmar"
+            android:text="@string/button_confirm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -75,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Cancelar"
+            android:text="@string/button_cancel"
             android:textColor="@color/button_cancel_color"
             app:layout_constraintBaseline_toBaselineOf="@+id/button_confirm"
             app:layout_constraintEnd_toEndOf="parent" />
