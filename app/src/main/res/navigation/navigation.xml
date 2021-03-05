@@ -93,6 +93,9 @@
         <argument
             android:name="environmentId"
             app:argType="long" />
+        <argument
+            android:name="projectId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/newEnvironmentFragment"
