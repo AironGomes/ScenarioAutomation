@@ -64,14 +64,14 @@
                 tools:text="Usuário"/>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_address"
+                android:id="@+id/text_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="@color/gray"
                 android:textAlignment="center"
                 android:ellipsize="end"
-                app:projectAddress="@{project.date}"
+                app:projectDate="@{project.date}"
                 android:singleLine="true"
                 tools:text="Modificado em: 01/01/2000"/>
 
