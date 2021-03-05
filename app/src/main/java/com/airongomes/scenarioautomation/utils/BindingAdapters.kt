@@ -4,6 +4,7 @@ import android.net.Uri
 import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.airongomes.scenarioautomation.R
@@ -52,14 +53,14 @@ fun ImageView.projectType(type: ProjectType?){
 @BindingAdapter("imageAbout")
 fun ImageView.imageAbout(imageUrl: String?){
     imageUrl?.let {
-        val imageUri = imageUrl.toUri().buildUpon().scheme("http").build()
+        val imageUri = imageUrl.toUri().buildUpon().scheme("https").build()
         Glide.with(context)
                 .load(imageUri)
                 .apply(
                         RequestOptions()
                                 .placeholder(R.drawable.animation_loading)
-                                .error(R.drawable.ic_broken))
-                .into(this)
+                                .error(R.drawable.ic_broken)
+                ).into(this)
 
     }
 }
