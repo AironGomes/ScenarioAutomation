@@ -11,8 +11,7 @@
             android:id="@+id/recycler_view_projects"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_margin="8dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_new_project"
