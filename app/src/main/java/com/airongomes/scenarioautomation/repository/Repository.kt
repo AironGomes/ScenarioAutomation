@@ -41,7 +41,10 @@ class Repository(application: Application) {
      */
     fun getProjectList() = projectDatabase.projectDao.getProjectList()
 
-
+    /**
+     * Atualiza data e hora no específico projeto
+     */
+    suspend fun updateDateTime(projectId: Long, dateTime: Long) = projectDatabase.projectDao.updateDateTime(projectId, dateTime)
 
     /* ------------------------------- EnvironmentDao -----------------------------------------*/
 
@@ -70,19 +73,12 @@ class Repository(application: Application) {
      */
     fun getEnvironmentList(projectId: Long) = projectDatabase.environmentDao.getEnvironmentList(projectId)
 
-
-
     /* ------------------------------- DeviceDao -----------------------------------------*/
 
     /**
      * Insere dispositivo no banco de dados
      */
     suspend fun insertDevice(device: Device) = projectDatabase.deviceDao.insertDevice(device)
-
-    /**
-     * Atualiza dispositivo no banco de dados
-     */
-    suspend fun updateDevice(device: Device) = projectDatabase.deviceDao.updateDevice(device)
 
     /**
      * Exclui dispositivo do banco de dados
