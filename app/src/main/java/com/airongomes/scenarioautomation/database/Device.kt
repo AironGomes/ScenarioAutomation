@@ -12,6 +12,7 @@ import androidx.room.PrimaryKey
 data class Device(
     @PrimaryKey(autoGenerate = true)
     val deviceId: Long = 0L,
-    val deviceName: String = "",
+    val manufacturerName: String,
+    val deviceName: String,
     val environmentId: Long
 )
