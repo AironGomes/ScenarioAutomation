@@ -38,7 +38,9 @@ class NewEnvironmentFragment: Fragment() {
     // Registrar callback para acessar galeria de imagens
     var galleryContent: ActivityResultLauncher<String> = registerForActivityResult(ActivityResultContracts.GetContent(),
             ActivityResultCallback { result ->
-                viewModel.setImageUri(result)
+                if(result != null) {
+                    viewModel.setImageUri(result)
+                }
                  })
 
     // Registrar callback para acessar a câmera
