@@ -13,7 +13,7 @@ data class Project(
         val userName: String = "",
         val address: String = "",
         val type: ProjectType,
-        val date: Long = 0L
+        var date: Long
 )
 
 class Converter {
