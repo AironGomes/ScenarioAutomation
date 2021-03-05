@@ -1,8 +1,6 @@
 package com.airongomes.scenarioautomation.utils
 
 import android.net.Uri
-import android.text.format.DateFormat
-import android.util.Log
 import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.TextView
@@ -12,7 +10,6 @@ import com.airongomes.scenarioautomation.R
 import com.airongomes.scenarioautomation.database.Environment
 import com.airongomes.scenarioautomation.database.Project
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.stream.MediaStoreImageThumbLoader
 import com.bumptech.glide.request.RequestOptions
 import java.util.*
 
@@ -26,19 +23,19 @@ fun TextView.projectUser(userName: String?){
 }
 
 /** --------- Adapter para Item Project ------------ */
-@BindingAdapter("projectAddress")
-fun TextView.projectAddress(dateMilli: Long?){
+@BindingAdapter("projectDate")
+fun TextView.projectDate(dateMilli: Long?){
     dateMilli?.let {
         val calendar = Calendar.getInstance()
         calendar.time = Date(dateMilli)
-        val dateFormatter = DateFormat.getDateFormat(context).format(calendar.time)
+        val dateFormatter = formatDateTimeStyle(calendar, context)
         val textString = "${resources.getText(R.string.modified_date)} $dateFormatter"
         text = textString
     }
 
 }
 
-/** --------- Adapter para Item Project & FragmentDetailProject ------------ */
+/** --------- Adapter para Item Project ------------ */
 @BindingAdapter("projectType")
 fun ImageView.projectType(type: ProjectType?){
     type?.let {
@@ -77,7 +74,7 @@ fun TextView.titleNewProject(project: Project?){
     }
 }
 
-/** --------- Adapter para New Project ------------ */
+/** --------- Adapter para New Project & Item Project ------------ */
 @BindingAdapter("projectName")
 fun TextView.projectName(project: Project?){
     project?.let {
@@ -85,7 +82,7 @@ fun TextView.projectName(project: Project?){
     }
 }
 
-/** --------- Adapter para New Project ------------ */
+/** --------- Adapter para New Project & Item Project ------------ */
 @BindingAdapter("projectUser")
 fun TextView.projectUser(project: Project?){
     project?.let {
@@ -125,7 +122,7 @@ fun TextView.environmentName(environment: Environment?){
     }
 }
 
-/** --------- Adapter para New Environment & Item Environment ------------ */
+/** --------- Adapter para Item Environment & New Environment ------------ */
 
 @BindingAdapter("imageEnvironment")
 fun ImageView.imageEnvironment(environment: Environment?){
@@ -143,6 +140,24 @@ fun ImageView.imageEnvironment(environment: Environment?){
         }
     }
     if (environment?.imageUri == null) {
+        setImageResource(R.drawable.ic_image)
+    }
+}
+
+/** --------- Adapter para New Environment ------------ */
+
+@BindingAdapter("imageUri")
+fun ImageView.imageUri(uri: Uri?){
+    uri?.let {
+        Glide.with(context)
+                .load(it)
+                .apply(
+                        RequestOptions()
+                                .error(R.drawable.ic_broken))
+                .into(this)
+
+    }
+    if (uri == null) {
         setImageResource(R.drawable.ic_image)
     }
 }
