@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.airongomes.scenarioautomation.R
 import com.airongomes.scenarioautomation.adapter.EnvironmentAdapter
 import com.airongomes.scenarioautomation.adapter.EnvironmentClickListener
@@ -51,6 +52,11 @@ class DetailProjectFragment : Fragment() {
 
         // Adiciona adapter para o RecyclerView
         binding.recyclerViewEnvironments.adapter = adapter
+
+        // Cria um layout manager
+        val layoutManager = LinearLayoutManager(activity)
+        // Associa o recyclerview com o layout manager
+        binding.recyclerViewEnvironments.layoutManager = layoutManager
 
         viewModel.environmentList.observe(viewLifecycleOwner, Observer {
             it?.let {
