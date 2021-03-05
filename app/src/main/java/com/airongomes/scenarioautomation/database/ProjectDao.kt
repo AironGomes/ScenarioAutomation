@@ -25,4 +25,7 @@ interface ProjectDao {
     @Query("DELETE from project_list_table WHERE projectId = :projectId")
     suspend fun deleteProject(projectId: Long)
 
+    @Query("UPDATE project_list_table SET date = :dateTime WHERE projectId = :projectId")
+    suspend fun updateDateTime(projectId: Long, dateTime: Long)
+
 }
