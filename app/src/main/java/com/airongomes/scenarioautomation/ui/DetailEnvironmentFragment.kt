@@ -160,7 +160,7 @@ class DetailEnvironmentFragment: Fragment() {
      */
     private fun callNewDeviceFragment(environmentId: Long) {
         this.findNavController().navigate(DetailEnvironmentFragmentDirections
-            .actionDetailEnvironmentFragmentToNewDeviceFragment(environmentId))
+            .actionDetailEnvironmentFragmentToNewDeviceFragment(environmentId, viewModel.environment.value!!.projectId))
     }
 
     /**
