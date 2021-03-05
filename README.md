@@ -16,6 +16,7 @@ No projeto também foi utilizado: Navigation, LiveData, Data-Binding, Binding Ad
 Para atender as especificações do projeto e apresentar uma imagem recebida por um link html, foi utilizada a Api Glide na tela "Sobre a Scenario".
 A mesma imagem foi baixada e salva no dispositivo (com menor resolução) para ser apresentado na Activity SplashScreen como imagem de background.
 
+Para validação das funcionalidades o aplicativo foi testado em emuladores com as API's 22, 27 e 30.
 ________________________________________________________________________________
 
 ### Ilustração das telas:
