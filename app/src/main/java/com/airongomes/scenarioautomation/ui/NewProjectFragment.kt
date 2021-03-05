@@ -15,6 +15,7 @@ import com.airongomes.scenarioautomation.database.ProjectDatabase
 import com.airongomes.scenarioautomation.databinding.FragmentNewProjectBinding
 import com.airongomes.scenarioautomation.viewModel.NewProjectViewModel
 import com.airongomes.scenarioautomation.viewModel.NewProjectViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class NewProjectFragment : Fragment() {
 
@@ -51,6 +52,11 @@ class NewProjectFragment : Fragment() {
         // Observar o Livedata closeFragment
         viewModel.closeFragment.observe(viewLifecycleOwner, Observer {
             if(it == true) {
+                Snackbar.make(
+                        binding.viewGroupId,
+                        resources.getText(R.string.message_saved),
+                        Snackbar.LENGTH_SHORT
+                ).show()
                 callHomeFragment()
                 viewModel.closeFragmentObserved()
             }
