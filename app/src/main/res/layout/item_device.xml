@@ -24,17 +24,30 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
-            android:padding="8dp"
+            android:paddingTop="8dp"
             android:singleLine="true"
             android:text="@{device.deviceName}"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/icon_delete_device"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Nome do Dispositivo" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_manufacturer_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="@{device.manufacturerName}"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/text_device_name"
+            app:layout_constraintEnd_toEndOf="@+id/text_device_name"
+            app:layout_constraintStart_toStartOf="@+id/text_device_name"
+            tools:text="Nome do Fabricante" />
 
         <ImageView
             android:id="@+id/icon_delete_device"
