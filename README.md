@@ -19,25 +19,10 @@ A mesma imagem foi baixada e salva no dispositivo (com menor resolução) para s
 Para validação das funcionalidades o aplicativo foi testado em emuladores com as API's 22, 27 e 30.
 ________________________________________________________________________________
 
-### Ilustração das telas:
+### Vídeo de demonstração:
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=2uIta5nWTAI"
+target="_blank"><img src="https://github.com/AironGomes/Imagens/blob/main/imagem_teste_empresa_Scenario.JPG" 
+alt="Tela Inicial" width="596" height="336" border="10" /></a>
 
-Splash Screen</br>
-<img src="/Screenshot/Screenshot_1614945349.png" width="270" alt="Splash Screen">
 
-Tela Incial</br>
-<img src="/Screenshot/Screenshot_1614945363.png" width="270" alt="Tela Incial">
 
-Detalhes do Projeto</br>
-<img src="/Screenshot/Screenshot_1614945398.png" width="270" alt="Detalhes do Projeto">
-
-Detalhes do Ambiente</br>
-<img src="/Screenshot/Screenshot_1614945406.png" width="270" alt="Detalhes do Ambiente">
-
-Editar Projeto</br>
-<img src="/Screenshot/Screenshot_1614945388.png" width="270" alt="Editar Projeto">
-
-Editar Ambiente</br>
-<img src="/Screenshot/Screenshot_1614945463.png" width="270" alt="Editar Ambiente">
-
-Editar Dispositivo</br>
-<img src="/Screenshot/Screenshot_1614945414.png" width="270" alt="Editar Dispositivo">
